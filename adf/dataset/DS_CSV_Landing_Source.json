@@ -1,0 +1,41 @@
+{
+	"name": "DS_CSV_Landing_Source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSGen2_AtliQ",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "supplier_price_list.csv",
+				"folderPath": "landing/csv",
+				"fileSystem": "lakehouse"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
