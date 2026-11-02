@@ -130,7 +130,7 @@
 														"type": "Expression"
 													},
 													"FileName": {
-														"value": "@concat(item().table_name, '_', formatDateTime(variables('v_run_start_at'), 'yyyyMMddHHmmss'), '.parquet')",
+														"value": "@concat(item().table_name, '.parquet')",
 														"type": "Expression"
 													},
 													"FileSystem": "lakehouse"
