@@ -1,0 +1,71 @@
+
+version: 2
+
+models:
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_product
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_date
+    columns:
+      - name: date_key
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fact_sales
+    columns:
+      - name: order_item_id
+        data_tests:
+          - unique
+          - not_null
+      - name: status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - Cancelled
+                  - Delivered
+                  - Placed
+                  - Returned
+                  - Shipped
+
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_id
+
+      - name: product_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_product')
+                field: product_id
+
+      - name: date_key
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+  - name: fact_web_sessions
+    columns:
+      - name: session_id
+        data_tests:
+          - unique
+          - not_null
