@@ -35,7 +35,7 @@
 				}
 			},
 			{
-				"name": "Job1",
+				"name": "Run_Databricks_Silver_Processing",
 				"type": "DatabricksJob",
 				"dependsOn": [
 					{
@@ -58,7 +58,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"jobId": "46102235398018"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
