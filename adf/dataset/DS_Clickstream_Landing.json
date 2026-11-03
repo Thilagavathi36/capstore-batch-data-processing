@@ -1,0 +1,19 @@
+{
+	"name": "DS_Clickstream_Landing",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADLSGen2_AtliQ",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "landing/clickstream",
+				"fileSystem": "lakehouse"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

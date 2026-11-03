@@ -1,0 +1,12 @@
+{
+	"name": "AzureDatabricks1",
+	"properties": {
+		"annotations": [],
+		"type": "AzureDatabricks",
+		"typeProperties": {
+			"domain": "https://adb-7405613834559606.6.azuredatabricks.net",
+			"authentication": "MSI",
+			"workspaceResourceId": "/subscriptions/92067dfc-5ae5-4bce-9c11-86fce96bb8a9/resourceGroups/rg-atliq-capstone/providers/Microsoft.Databricks/workspaces/dbw-atliq-capstone"
+		}
+	}
+}
