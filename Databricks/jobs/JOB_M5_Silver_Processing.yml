@@ -1,0 +1,40 @@
+resources:
+  jobs:
+    JOB_M5_Silver_Processing:
+      name: JOB_M5_Silver_Processing
+      tasks:
+        - task_key: M3_FINAL_01_Bronze_to_Silver
+          notebook_task:
+            notebook_path: /Workspace/Users/thilamdp@gmail.com/M3_FINAL_01_Bronze_to_Silver
+            base_parameters:
+              run_date: "{{job.start_time.iso_date}}"
+            source: WORKSPACE
+        - task_key: M3_FINAL_02_Update_DQ_Log
+          depends_on:
+            - task_key: M3_FINAL_01_Bronze_to_Silver
+          notebook_task:
+            notebook_path: /Workspace/Users/thilamdp@gmail.com/M3_FINAL_02_Update_DQ_Log
+            base_parameters:
+              run_date: "{{job.start_time.iso_date}}"
+            source: WORKSPACE
+        - task_key: M5_dbt_Gold_Build
+          depends_on:
+            - task_key: M3_FINAL_02_Update_DQ_Log
+          dbt_task:
+            project_directory: /Workspace/Users/thilamdp@gmail.com/capstore-batch-data-processing/atliq_gold
+            commands:
+              - dbt build --no-partial-parse
+            schema: gold
+            warehouse_id: 32852ceba6bbedc9
+            catalog: atliq
+            source: WORKSPACE
+          environment_key: dbt-default
+      queue:
+        enabled: true
+      environments:
+        - environment_key: dbt-default
+          spec:
+            dependencies:
+              - dbt-databricks>=1.0.0,<2.0.0
+            environment_version: "6"
+      performance_target: PERFORMANCE_OPTIMIZED
