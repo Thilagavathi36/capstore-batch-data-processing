@@ -1,0 +1,49 @@
+
+name: dbt CI
+
+on:
+  pull_request:
+    paths:
+      - "atliq_gold/**"
+      - ".github/workflows/dbt-ci.yml"
+
+jobs:
+  dbt-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dbt
+        run: pip install dbt-core==1.12.5 dbt-databricks==1.12.7
+
+      - name: Configure dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml <<'EOF'
+          atliq_gold:
+            target: ci
+            outputs:
+              ci:
+                type: databricks
+                catalog: atliq
+                schema: gold_ci
+                host: "{{ env_var('DATABRICKS_HOST') }}"
+                http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+                token: "{{ env_var('DATABRICKS_TOKEN') }}"
+                threads: 4
+          EOF
+
+      - name: Build and test dbt models
+        working-directory: ./atliq_gold
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: dbt build --target ci
