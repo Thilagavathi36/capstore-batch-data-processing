@@ -2,6 +2,9 @@ resources:
   jobs:
     JOB_M5_Silver_Processing:
       name: JOB_M5_Silver_Processing
+      email_notifications:
+        on_failure:
+          - thilagavathimani36@gmail.com
       tasks:
         - task_key: M3_FINAL_01_Bronze_to_Silver
           notebook_task:
@@ -9,6 +12,12 @@ resources:
             base_parameters:
               run_date: "{{job.start_time.iso_date}}"
             source: WORKSPACE
+          max_retries: 3
+          min_retry_interval_millis: 300000
+          disable_auto_optimization: false
+          email_notifications:
+            on_failure:
+              - thilagavathimani36@gmail.com
         - task_key: M3_FINAL_02_Update_DQ_Log
           depends_on:
             - task_key: M3_FINAL_01_Bronze_to_Silver
@@ -17,6 +26,12 @@ resources:
             base_parameters:
               run_date: "{{job.start_time.iso_date}}"
             source: WORKSPACE
+          max_retries: 2
+          min_retry_interval_millis: 300000
+          disable_auto_optimization: false
+          email_notifications:
+            on_failure:
+              - thilagavathimani36@gmail.com
         - task_key: M5_dbt_Gold_Build
           depends_on:
             - task_key: M3_FINAL_02_Update_DQ_Log
@@ -28,7 +43,30 @@ resources:
             warehouse_id: 32852ceba6bbedc9
             catalog: atliq
             source: WORKSPACE
+          max_retries: 2
+          min_retry_interval_millis: 300000
+          disable_auto_optimization: false
+          email_notifications:
+            on_failure:
+              - thilagavathimani36@gmail.com
           environment_key: dbt-default
+        - task_key: M7_Pipeline_Run_Audit
+          depends_on:
+            - task_key: M3_FINAL_01_Bronze_to_Silver
+            - task_key: M3_FINAL_02_Update_DQ_Log
+            - task_key: M5_dbt_Gold_Build
+          run_if: ALL_DONE
+          notebook_task:
+            notebook_path: /Workspace/Users/thilamdp@gmail.com/capstore-batch-data-processing/M7_Pipeline_Run_Audit
+            base_parameters:
+              job_run_id: "{{job.run_id}}"
+            source: WORKSPACE
+          max_retries: 2
+          min_retry_interval_millis: 300000
+          disable_auto_optimization: false
+          email_notifications:
+            on_failure:
+              - thilagavathimani36@gmail.com
       queue:
         enabled: true
       environments:
