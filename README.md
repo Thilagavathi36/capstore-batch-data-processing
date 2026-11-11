@@ -33,7 +33,7 @@ GitHub Actions dbt CI | Databricks Workflow | Audit | Alerts
 ## Milestone summary
 
 | Milestone | Deliverable 
-|---|---|---|
+|---|---|
 | **M1** | Azure SQL normalized OLTP, ETL control/watermarks 
 | **M2** | Metadata-driven ADF → ADLS Bronze full/incremental ingestion
 | **M3** | Databricks Silver Delta cleaning, dedup, MERGE, quarantine, DQ log 
