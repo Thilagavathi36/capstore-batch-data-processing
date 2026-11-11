@@ -32,15 +32,15 @@ GitHub Actions dbt CI | Databricks Workflow | Audit | Alerts
 
 ## Milestone summary
 
-| Milestone | Deliverable | Current evidence |
+| Milestone | Deliverable 
 |---|---|---|
-| **M1** | Azure SQL normalized OLTP, ETL control/watermarks | Implementation discussed; schema screenshots requested |
-| **M2** | Metadata-driven ADF → ADLS Bronze full/incremental ingestion | ADF successful run screenshot supplied |
-| **M3** | Databricks Silver Delta cleaning, dedup, MERGE, quarantine, DQ log | Notebooks committed; Silver reconciliation screenshot supplied |
-| **M4** | dbt: 8 sources, 6 staging views, 5 Gold tables, 17 tests | 28/28 build resources passed in earlier CI; screenshot requested |
-| **M5** | Databricks job orchestration, rerun safety | Successful workflow screenshot; paired rerun proof requested |
-| **M6** | Fabric Power BI sales report and semantic model | `.pbix` committed; semantic model Git export unconfirmed |
-| **M7** | GitHub Actions CI, retry policy, audit tables, task-level failure email | Four-task job, 13-table audit, failure test and email screenshots supplied |
+| **M1** | Azure SQL normalized OLTP, ETL control/watermarks 
+| **M2** | Metadata-driven ADF → ADLS Bronze full/incremental ingestion
+| **M3** | Databricks Silver Delta cleaning, dedup, MERGE, quarantine, DQ log 
+| **M4** | dbt: 8 sources, 6 staging views, 5 Gold tables, 17 tests 
+| **M5** | Databricks job orchestration, rerun safety 
+| **M6** | Fabric Power BI sales report and semantic model 
+| **M7** | GitHub Actions CI, retry policy, audit tables, task-level failure email 
 
 ## Gold data model
 
@@ -63,9 +63,9 @@ Six staging SQL models: `stg_customers`, `stg_orders`, `stg_order_items`, `stg_p
 | Successful audit run | `964179792108871` | Run status SUCCESS, 2026-11-06 |
 | Controlled failure alert | **Received** | Task-level email after intentional invalid date |
 
-![workflow evidenc](Jobs_workflow-1.png)
+![workflow evidenc](docs/images/Jobs_workflow-1.png)
 
-![Audit snapshot evidence](Audit_log_Table-1.png)
+![Audit snapshot evidence](docs/images/Audit_log_Table-1.png)
 
 ## Repository map
 
@@ -98,20 +98,6 @@ docs/M1-M7-TECHNICAL-DOCUMENTATION.md  # full narrative + evidence
 
 The existing dashboard includes Net Revenue, Orders, Customers, Average Order Value, monthly trend, product/city revenue, conversion funnel, date and category slicers. Values change with filters. 
 
-![Semantic Model](AtliQ_Semantic_model-1.png)
-![Dashboard](AtliQ_dashboard-1.png)
+![Semantic Model](docs/images/AtliQ_Semantic_model.png)
+![Dashboard](docs/images/AtliQ_dashboard.png)
 
-## Known limitations and next steps
-
-- Paired same-input idempotency evidence with matching `COUNT(*)` and `SUM(gross_revenue)`.
-- **[ATTACH M7-01 HERE]** GitHub Actions 28/28 successful-run screenshot.
-- Confirm/export actual Fabric semantic model definitions (TMDL/PBIP if supported); a `.pbix` file alone is not a reviewable text-based model history.
-- Verify the guide's new-versus-returning-customers visual.
-- `pipeline_run_audit.rows_processed` is currently NULL by design; the 13-table audit records are snapshots, not processed-row throughput.
-- Review linked-service JSON, notebooks and screenshots for tokens, passwords, emails and other sensitive information before publishing.
-
-## Documentation
-
-**[Full technical documentation, validation tables, screenshot gallery and evidence requests](docs/M1-M7-TECHNICAL-DOCUMENTATION.md)**
-
-Repository: [capstore-batch-data-processing](https://github.com/Thilagavathi36/capstore-batch-data-processing)
