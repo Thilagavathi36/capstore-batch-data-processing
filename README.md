@@ -69,7 +69,7 @@ Six staging SQL models: `stg_customers`, `stg_orders`, `stg_order_items`, `stg_p
 
 ## Repository map
 
-
+```text
 .github/workflows/dbt-ci.yml          # dbt CI on pull requests
 Databricks/jobs/JOB_M5_Silver_Processing.yml
 Databricks/M3_FINAL_01_Bronze_to_Silver.ipynb
@@ -80,7 +80,7 @@ atliq_gold/                            # dbt project and tests
 phase1_project_assets/                 # source/sample assets
 AtliQ_Commerce_Dashboard.pbix          # Power BI report (binary)
 docs/M1-M7-TECHNICAL-DOCUMENTATION.md  # full narrative + evidence
-
+```
 
 
 ## How to operate
