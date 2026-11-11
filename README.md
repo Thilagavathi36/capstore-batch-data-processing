@@ -28,7 +28,7 @@ Azure SQL OLTP + CSV / Clickstream sources
 
 GitHub Actions dbt CI | Databricks Workflow | Audit | Alerts
 
-![AtliQ_architecture](capstone_arch.drawio-1.png)
+![AtliQ Architecture](docs/images/capstone_arch.drawio-1.png)
 
 ## Milestone summary
 
